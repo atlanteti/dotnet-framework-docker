@@ -1,0 +1,21 @@
+name: Teste Cache
+
+on:
+  push:
+    branches: "teste-cache"
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 
+
+      - name: Build tag, and push image to Amazon ECR
+        id: build-image
+        run: |
+          cd samples
+          cd aspnetmvcapp
+          docker build --pull -t aspnetmvcapp .
